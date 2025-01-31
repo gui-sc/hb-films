@@ -16,7 +16,7 @@
     --color-gray2: #9c9d9d;
     --color-white: #f6f6f6;
     --color-destaque1: #e7fc00;
-    --color-destaque2: #728e6f;
+    --color-destaque2: #c7c677;
 }
 
 /* Estilizando a barra de rolagem */
@@ -151,7 +151,7 @@ a {
 }
 
 .logo img {
-    width: 150px;
+    width: 80px;
 }
 
 /* Menu */
@@ -414,13 +414,14 @@ a {
 }
 
 .headline-sobre {
+    top: 85%;
     height: 30%;
     width: 100vw;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: absolute;
 }
 
 .headline-scroll {
@@ -428,12 +429,11 @@ a {
     align-items: center;
     white-space: nowrap;
     animation: scroll 20s linear infinite;
-    will-change: transform;
 }
 
 @keyframes scroll {
     0% {
-        transform: translateX(50%);
+        transform: translateX(0%);
     }
 
     100% {
@@ -559,7 +559,7 @@ a {
 }
 
 .imagem-sobre img {
-    width: 90%;
+    width: 100%;
     z-index: 99;
 }
 
@@ -603,8 +603,9 @@ a {
     max-width: 900px;
 }
 
+/* alinhar ao centro quando não ocupar tudo */
 .conteudo-skills {
-    display: grid;
+    display: flex;
     gap: 1rem;
     width: 100%;
 }
@@ -614,6 +615,7 @@ a {
     border-radius: 20px;
     color: var(--color-white);
     display: flex;
+    width: 33%;
     flex-direction: column;
     justify-content: center;
     height: 450px;
@@ -1222,3 +1224,4 @@ a {
 .credits-column p {
     margin: 0.2rem 0;
 }
+

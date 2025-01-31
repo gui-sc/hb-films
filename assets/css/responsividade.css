@@ -19,6 +19,14 @@
         position: relative;
     }
 
+    .conteudo-skills {
+        display: grid;
+    }
+
+    .box-skills {
+        width: 100%;
+    }
+
     .conteudo-sobre {
         flex-direction: column-reverse;
         height: auto;
