@@ -608,6 +608,7 @@ a {
 .conteudo-skills {
     padding: 0 1rem;
     display: flex;
+    justify-content: center;
     gap: 1rem;
     width: 100%;
 }
@@ -1222,10 +1223,17 @@ a {
 .credits-column {
     text-align: right;
     font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--color-white);
 }
 
 .credits-column p {
     margin: 0.2rem 0;
+}
+
+.credits-column p a {
+    text-decoration: none;
+    color: var(--color-destaque1);
 }
 
 /*************** PORTFOLIO *****/

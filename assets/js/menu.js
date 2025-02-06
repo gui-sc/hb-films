@@ -11,4 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
             menuAberto.classList.remove('active');
         }
     });
+
+    const allRightsParagraph = document.getElementById('all-rights');
+    const currentYear = new Date().getFullYear();
+    allRightsParagraph.innerText = allRightsParagraph.innerText.replace('{year}', currentYear);
 });
