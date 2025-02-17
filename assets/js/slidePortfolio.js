@@ -3,35 +3,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     slides.forEach((slide) => {
         let currentIndex = 0;
-        const images = slide.querySelectorAll('img');
+        const videos = slide.querySelectorAll('video');
         const nextButton = slide.querySelector('.next');
         const prevButton = slide.querySelector('.prev');
-        const intervalTime = 3000;
 
         // Função para mostrar a imagem atual
         function showSlide(index) {
-            images.forEach((img, i) => {
-                img.style.opacity = (i === index) ? '1' : '0';
+            videos.forEach((video, i) => {
+                video.style.opacity = (i === index) ? '1' : '0';
+                video.style.display = (i === index) ? 'block' : 'none';
             });
         }
 
         // Navegação para o próximo slide
         nextButton.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % images.length;
+            console.log('next');
+            currentIndex = (currentIndex + 1) % videos.length;
             showSlide(currentIndex);
         });
 
         // Navegação para o slide anterior
         prevButton.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            console.log('prev');
+            currentIndex = (currentIndex - 1 + videos.length) % videos.length;
             showSlide(currentIndex);
         });
-
-        // Slideshow automático
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % images.length;
-            showSlide(currentIndex);
-        }, intervalTime);
 
         // Exibe o slide inicial
         showSlide(currentIndex);
