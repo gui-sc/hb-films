@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     slides.forEach((slide) => {
         let currentIndex = 0;
-        const videos = slide.querySelectorAll('video');
+        const videos = slide.querySelectorAll('iframe');
         const nextButton = slide.querySelector('.next');
         const prevButton = slide.querySelector('.prev');
 

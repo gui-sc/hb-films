@@ -913,7 +913,7 @@ a {
     position: relative;
 }
 
-.slide-video video {
+.slide-video iframe {
     max-width: 100%;
     border: none;  /* Remove a borda padrão do iframe */
 }
