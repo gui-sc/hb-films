@@ -154,6 +154,14 @@ a {
     width: 80px;
 }
 
+.logo-hero {
+    width: 100%;
+}
+
+.logo-hero img {
+    width: 200px;
+}
+
 /* Menu */
 .menu {
     display: flex;
@@ -291,7 +299,15 @@ a {
     font-weight: normal;
 }
 
+.titulo-inicio h3 {
+    margin-bottom: 1rem;
+}
+
+.titulo-inicio p {
+    font-size: large;
+}
 .destaque-inicio {
+    font-size: larger;
     font-weight: lighter;
 }
 
