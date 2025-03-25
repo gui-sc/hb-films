@@ -958,7 +958,6 @@ a {
     max-width: 100%;
     z-index: 0;
     border: none;  /* Remove a borda padrão do iframe */
-    pointer-events: none;
 }
 
 
