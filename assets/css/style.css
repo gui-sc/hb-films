@@ -842,7 +842,8 @@ a {
 .portfolio {
     width: 100%;
     height: 100%;
-    color: var(--color-white);
+    color: var(--color-black);
+    background-color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -872,11 +873,13 @@ a {
     width: 50%;
     font-size: 6vw;
     font-weight: lighter;
+    color: var(--color-black);
     font-family: var(--font-grande);
 }
 
 .headline-portfolio .descricao {
     width: 50%;
+    color: var(--color-black);
     font-size: 2rem;
     text-align: right;
     line-height: 1.4;
@@ -891,6 +894,21 @@ a {
     align-items: center;
     justify-content: center;
     gap: 8rem;
+}
+
+.case1 .conteudo-textos-case h1, .case3 .conteudo-textos-case h1,
+.case3 .conteudo-textos-case p,  .case1 .conteudo-textos-case p {
+    color: var(--color-black)
+}
+
+.case1 .conteudo-textos-case span, .case3 .conteudo-textos-case span{
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.case2 {
+    background-color: var(--color-black);
+    padding: 2rem 0;
 }
 
 .case1,
@@ -935,9 +953,12 @@ a {
 }
 
 .slide-video iframe {
+    min-height: 15rem;
     height: 100%;
     max-width: 100%;
+    z-index: 0;
     border: none;  /* Remove a borda padrão do iframe */
+    pointer-events: none;
 }
 
 
@@ -966,14 +987,15 @@ a {
     position: absolute;
     top: 50%;
     width: auto;
-    padding: 16px;
+    padding: 6px;
     color: var(--color-white);
     font-size: 2rem;
     user-select: none;
     transform: translateY(-50%);
     border-radius: 50%;
-    z-index: 1;
+    z-index: 10;
     display: none;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .prev {
@@ -1288,7 +1310,7 @@ a {
 }
 
 .container-portfolio {
-    padding: 0 2rem;
+    padding: 0;
     width: 100%;
     max-width: 1400px;
     height: 100%;
@@ -1336,7 +1358,7 @@ a {
 .case3,
 .case4 {
     width: 100%;
-    height: 70vh;
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 2rem;
