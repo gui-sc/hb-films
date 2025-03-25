@@ -274,6 +274,7 @@ a {
 }
 
 .container-inicio {
+    padding-top: 1.5rem;
     width: 100%;
     height: 100%;
     color: var(--color-white);
@@ -849,7 +850,7 @@ a {
 }
 
 .container-portfolio {
-    padding: 0 2rem;
+    padding: 0;
     width: 100%;
     max-width: 1400px;
     height: 100%;
@@ -869,7 +870,7 @@ a {
 
 .headline-portfolio .titulo {
     width: 50%;
-    font-size: 8vw;
+    font-size: 6vw;
     font-weight: lighter;
     font-family: var(--font-grande);
 }
@@ -896,15 +897,17 @@ a {
 .case2,
 .case3,
 .case4 {
+    flex-direction: column;
+        height: auto;
+        justify-content: center;
     width: 100%;
-    height: 70vh;
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
 .imagens-case {
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -921,7 +924,9 @@ a {
 }
 
 .slide-video {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
     justify-content: center;  /* Centraliza horizontalmente */
     align-items: center;  /* Centraliza verticalmente */
     height: 100%;
@@ -967,6 +972,7 @@ a {
     transform: translateY(-50%);
     border-radius: 50%;
     z-index: 1;
+    display: none;
 }
 
 .prev {
@@ -978,7 +984,7 @@ a {
 }
 
 .textos-case {
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -989,7 +995,7 @@ a {
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: left;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
 }
@@ -1351,9 +1357,10 @@ a {
 }
 
 .textos-case {
-    width: 50%;
+    width: 70%;
     height: 100%;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
 }
@@ -1362,21 +1369,9 @@ a {
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: left;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-#textos-case2 h1 {
-    text-align: right;
-}
-
-#textos-case2 p {
-    text-align: right;
-}
-
-#textos-case2 a {
-    align-self: end;
 }
 
 .conteudo-textos-case h1 {
