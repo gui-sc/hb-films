@@ -906,6 +906,10 @@ a {
     color: var(--color-white);
 }
 
+.case2 .video-title {
+    color: var(--color-white);
+}
+
 .case2 {
     background-color: var(--color-black);
     padding: 2rem 0;
@@ -938,18 +942,27 @@ a {
     height: 100%;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     justify-content: space-between;
 }
 
 .slide-video {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    place-items: center;
     gap: 2rem;
     justify-content: center;  /* Centraliza horizontalmente */
     align-items: center;  /* Centraliza verticalmente */
     height: 100%;
     width: 100%;
     position: relative;
+}
+
+.header-slide{
+    display: none;
+    width: 100%;
 }
 
 .slide-video iframe {
@@ -992,14 +1005,11 @@ a {
 .prev,
 .next {
     cursor: pointer;
-    position: absolute;
-    top: 50%;
     width: auto;
     padding: 6px;
     color: var(--color-white);
     font-size: 2rem;
     user-select: none;
-    transform: translateY(-50%);
     border-radius: 50%;
     z-index: 10;
     display: none;
@@ -1020,6 +1030,15 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.video-title{
+    color: var(--color-black);
+    font-size: 1.5rem;
+    font-family: var(--font-grande);
+    font-weight: lighter;
+    text-align: center;
+
 }
 
 .conteudo-textos-case {

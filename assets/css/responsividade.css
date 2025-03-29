@@ -32,6 +32,12 @@
         gap: 3rem;
     }
 
+    .header-slide{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
     .slide-video {
         display:flex;
     }
@@ -144,6 +150,10 @@
 
     .conteudo-textos-case {
         align-items: center;
+    }
+
+    .conteudo-textos-case p {
+        font-size: 1rem;
     }
 
     #textos-case2 h1 {
