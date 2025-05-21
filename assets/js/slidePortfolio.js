@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     slides.forEach((slide, i) => {
         const videoTitle = videoTitles[i];
         let currentIndex = 0;
-        const videos = slide.querySelectorAll("iframe");
+        const videos = slide.querySelectorAll("video");
         const nextButton = slide.querySelector(".next");
         const prevButton = slide.querySelector(".prev");
         const titleElement = slide.querySelector(".video-title");

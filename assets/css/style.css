@@ -966,7 +966,7 @@ a {
     width: 100%;
 }
 
-.slide-video iframe {
+.slide-video video {
     min-height: 15rem;
     height: 100%;
     max-width: 100%;
@@ -980,11 +980,11 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 5; /* Fica acima do iframe, mas abaixo dos botões */
+    z-index: 5; /* Fica acima do video, mas abaixo dos botões */
     pointer-events: none; /* Não bloqueia interações no vídeo */
 }
 
-/* .slide iframe {
+/* .slide video {
     object-fit: cover;
     display: flex;
     align-items: center;
@@ -998,7 +998,7 @@ a {
     opacity: 0;
 }
 
-.slide iframe:first-child {
+.slide video:first-child {
     display: block;
     opacity: 1;
 } */
