@@ -966,7 +966,7 @@ a {
     width: 100%;
 }
 
-.slide-video video {
+.slide-video iframe {
     min-height: 15rem;
     height: 100%;
     max-width: 100%;
