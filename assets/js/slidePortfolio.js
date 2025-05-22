@@ -20,35 +20,48 @@ document.addEventListener("DOMContentLoaded", function () {
     slides.forEach((slide, i) => {
         const videoTitle = videoTitles[i];
         let currentIndex = 0;
-        const videos = slide.querySelectorAll("iframe");
+        const videos = slide.querySelectorAll("video");
         const nextButton = slide.querySelector(".next");
         const prevButton = slide.querySelector(".prev");
         const titleElement = slide.querySelector(".video-title");
 
-        // Função para mostrar a imagem atual
+        // Pause all videos initially except the first one
+        videos.forEach((video, index) => {
+            if (index !== 0) {
+                video.style.display = "none";
+            }
+        });
+
+        // Function to show the current video
         function showSlide(index) {
             titleElement.textContent = videoTitle[index];
             videos.forEach((video, i) => {
-                video.style.opacity = i === index ? "1" : "0";
-                video.style.display = i === index ? "block" : "none";
+                if (i === index) {
+                    video.style.display = "block";
+                    video.style.opacity = "1";
+                } else {
+                    video.pause();
+                    video.style.display = "none";
+                    video.style.opacity = "0";
+                }
             });
         }
 
-        // Navegação para o próximo slide
+        // Navigation for next slide
         nextButton.addEventListener("click", () => {
-            console.log("next");
+            videos[currentIndex].pause();
             currentIndex = (currentIndex + 1) % videos.length;
             showSlide(currentIndex);
         });
 
-        // Navegação para o slide anterior
+        // Navigation for previous slide
         prevButton.addEventListener("click", () => {
-            console.log("prev");
+            videos[currentIndex].pause();
             currentIndex = (currentIndex - 1 + videos.length) % videos.length;
             showSlide(currentIndex);
         });
 
-        // Exibe o slide inicial
+        // Show initial slide
         if(window.matchMedia('(max-width: 1024px)').matches){
             showSlide(currentIndex);
         }
