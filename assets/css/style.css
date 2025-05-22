@@ -842,8 +842,7 @@ a {
 .portfolio {
     width: 100%;
     height: 100%;
-    color: var(--color-black);
-    background-color: var(--color-white);
+    color: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -871,16 +870,13 @@ a {
 
 .headline-portfolio .titulo {
     width: 50%;
-    font-size: 6vw;
-    text-align: center;
+    font-size: 8vw;
     font-weight: lighter;
-    color: var(--color-black);
     font-family: var(--font-grande);
 }
 
 .headline-portfolio .descricao {
     width: 50%;
-    color: var(--color-black);
     font-size: 2rem;
     text-align: right;
     line-height: 1.4;
@@ -897,40 +893,19 @@ a {
     gap: 8rem;
 }
 
-.case1 .conteudo-textos-case h1, .case3 .conteudo-textos-case h1,
-.case3 .conteudo-textos-case p,  .case1 .conteudo-textos-case p {
-    color: var(--color-black)
-}
-
-.case1 .conteudo-textos-case span, .case3 .conteudo-textos-case span{
-    background-color: var(--color-black);
-    color: var(--color-white);
-}
-
-.case2 .video-title {
-    color: var(--color-white);
-}
-
-.case2 {
-    background-color: var(--color-black);
-    padding: 2rem 0;
-}
-
 .case1,
 .case2,
 .case3,
 .case4 {
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
     width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
 .imagens-case {
-    width: 100%;
+    width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -954,14 +929,41 @@ a {
     grid-template-columns: repeat(4, 1fr);
     place-items: center;
     gap: 2rem;
-    justify-content: center;  /* Centraliza horizontalmente */
-    align-items: center;  /* Centraliza verticalmente */
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
     position: relative;
 }
 
-.header-slide{
+.slide-video video {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+    .slide-video {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide-video video {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .header-slide {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
+.header-slide {
     display: none;
     width: 100%;
 }
@@ -980,28 +982,9 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 5; /* Fica acima do video, mas abaixo dos botões */
-    pointer-events: none; /* Não bloqueia interações no vídeo */
+    z-index: 5;
+    pointer-events: none;
 }
-
-/* .slide video {
-    object-fit: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    transition: opacity 1s ease-in-out;
-    position: absolute;
-    display: none;
-    top: 0;
-    left: 0;
-    opacity: 0;
-}
-
-.slide video:first-child {
-    display: block;
-    opacity: 1;
-} */
 
 .prev,
 .next {
@@ -1026,20 +1009,12 @@ a {
 }
 
 .textos-case {
-    width: 100%;
+    width: 70%;
     height: 100%;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
-}
-
-.video-title{
-    color: var(--color-black);
-    font-size: 1.5rem;
-    font-family: var(--font-grande);
-    font-weight: lighter;
-    text-align: center;
-
 }
 
 .conteudo-textos-case {
@@ -1077,6 +1052,12 @@ a {
     color: var(--color-black);
     font-weight: bold;
     letter-spacing: 1.2px;
+    transition: all 0.5s ease;
+}
+
+.conteudo-textos-case span:hover {
+    background-color: var(--color-destaque2);
+    color: var(--color-black);
 }
 
 /*************** CONTATO *****/
@@ -1324,137 +1305,4 @@ a {
 .credits-column p a {
     text-decoration: none;
     color: var(--color-destaque1);
-}
-
-/*************** PORTFOLIO *****/
-.portfolio {
-    width: 100%;
-    height: 100%;
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 0rem 7rem 0rem;
-}
-
-.container-portfolio {
-    padding: 0;
-    width: 100%;
-    max-width: 1400px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.headline-portfolio {
-    width: 100%;
-    height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.headline-portfolio .titulo {
-    width: 50%;
-    font-size: 8vw;
-    font-weight: lighter;
-    font-family: var(--font-grande);
-}
-
-.headline-portfolio .descricao {
-    width: 50%;
-    font-size: 2rem;
-    text-align: right;
-    line-height: 1.4;
-    letter-spacing: 1.5px;
-}
-
-.container-case {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8rem;
-}
-
-.case1,
-.case2,
-.case3,
-.case4 {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.imagens-case {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.video-case {
-    width: auto;
-    height: 100%;
-    aspect-ratio: 9/16; /* Mantém a proporção 9:16 */
-    border-radius: 10px; /* Adiciona bordas arredondadas */
-}
-
-.textos-case {
-    width: 70%;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-}
-
-.conteudo-textos-case {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.conteudo-textos-case h1 {
-    color: var(--color-white);
-    font-size: 6vw;
-    letter-spacing: 3px;
-}
-
-.conteudo-textos-case p {
-    color: var(--color-gray2);
-    font-size: 1.5rem;
-    line-height: 1.4;
-    letter-spacing: 1.5px;
-    padding-bottom: 1.5rem;
-}
-
-.conteudo-textos-case span {
-    width: 180px;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    background-color: var(--color-white);
-    border-radius: 50px;
-    color: var(--color-black);
-    font-weight: bold;
-    letter-spacing: 1.2px;
-    transition: all 0.5s ease;
-}
-
-.conteudo-textos-case span:hover {
-    background-color: var(--color-destaque2);
-    color: var(--color-black);
 }
