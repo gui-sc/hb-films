@@ -3,13 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const videoTitles = [
         [
             "King Studio",
-            "Sítio do Cássio",
-            "Ink Studio",
+            "Dom Sarmento",
             "Maurício Recursos de Multas"
         ],
         [
-            "Festa de 15 anos",
             "Casamento",
+            "Festa de 15 anos",
             "Torneio Beach Tennis"
         ],
         [
