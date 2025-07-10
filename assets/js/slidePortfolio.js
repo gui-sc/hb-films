@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "Torneio Beach Tennis"
         ],
         [
-            "Goleiro de Futsal",
             "Futevôlei",
         ]
     ]
