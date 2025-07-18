@@ -9,9 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         [
             "Casamento",
+            "Chá Revelação",
         ],
         [
             "Futevôlei",
+            "Futevôlei",
+            "Futsal",
         ]
     ]
     slides.forEach((slide, i) => {
