@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         [
             "Casamento",
             "Chá Revelação",
-            "Casamento",
+            "Bodas de Ouro",
         ],
         [
             "Futevôlei",
