@@ -6,19 +6,16 @@ import {
     useRef,
     useState,
 } from "react";
-import logo from "../assets/img/logo.png";
 import logoMark from "../assets/img/logohb.png";
-import director from "../assets/img/foto_henrique.png";
-import focusGraphic from "../assets/img/texto-gira.png";
 
 const whatsappUrl = "https://wa.me/5548999188549";
 const contactHref = `${whatsappUrl}?text=${encodeURIComponent("Olá, gostaria de conversar sobre um projeto audiovisual.")}`;
 
 const videos = {
-    elos: "https://storage.googleapis.com/hbfilms/elos.mp4",
-    mauricio: "https://storage.googleapis.com/hbfilms/mauricio_recursos.mp4",
-    farmagnus: "https://storage.googleapis.com/hbfilms/farmagnus.mp4",
-    king: "https://storage.googleapis.com/hbfilms/king.mp4",
+    hero: "https://storage.googleapis.com/hbfilms/king.mp4",
+    chefDoDisco: "https://storage.googleapis.com/hbfilms/chef_do_disco.mp4",
+    surfsScream: "https://storage.googleapis.com/hbfilms/surfs_scream.mp4",
+    paoDeLo: "https://storage.googleapis.com/hbfilms/pao_de_lo.mp4",
 };
 
 type Project = {
@@ -34,43 +31,43 @@ type Project = {
 const projects: Project[] = [
     {
         code: "014",
-        category: "Institucional",
-        title: "Uma operação que merece ser compreendida.",
-        client: "Farmagnus",
+        category: "Gastronomia",
+        title: "Conteúdo gastronômico com presença.",
+        client: "Chef do Disco",
         description:
-            "Um filme institucional para apresentar a operação com clareza, presença e uma narrativa fácil de lembrar.",
-        source: videos.farmagnus,
-        format: "Filme institucional",
+            "Conteúdo gastronômico criado para despertar interesse e aproximar a marca das pessoas.",
+        source: videos.chefDoDisco,
+        format: "Conteúdo gastronômico",
     },
     {
         code: "021",
-        category: "Marca",
-        title: "Clareza para quem precisa decidir.",
-        client: "Elos Contabilidade",
+        category: "Publicidade",
+        title: "Vídeos publicitários em movimento.",
+        client: "Surfs Scream",
         description:
-            "Uma presença audiovisual pensada para explicar valor, aproximar pessoas e dar escala à percepção da marca.",
-        source: videos.elos,
-        format: "Filme de marca",
+            "Vídeos publicitários pensados para dar ritmo, presença e impacto à comunicação da marca.",
+        source: videos.surfsScream,
+        format: "Vídeos publicitários",
     },
     {
         code: "032",
-        category: "Corporativo",
-        title: "Clareza para quem precisa avançar.",
-        client: "Maurício Recursos de Multas",
+        category: "Comercial",
+        title: "Conteúdos comerciais para a marca.",
+        client: "Pão de Ló",
         description:
-            "Conteúdo corporativo pensado para explicar um serviço, aproximar pessoas e dar mais presença à marca.",
-        source: videos.mauricio,
-        format: "Conteúdo corporativo",
+            "Conteúdos comerciais que apresentam produtos com clareza e constroem desejo de compra.",
+        source: videos.paoDeLo,
+        format: "Conteúdos comerciais",
     },
 ];
 
 const capabilities = [
     [
-        "Filmes corporativos",
+        "Vídeos corporativos",
         "Para apresentar uma empresa, uma operação ou uma nova fase com clareza.",
     ],
     [
-        "Filmes de marca",
+        "Vídeos de marca",
         "Para dar forma, tom e presença ao que uma marca quer dizer.",
     ],
     [
@@ -87,7 +84,11 @@ const capabilities = [
     ],
 ];
 
-function Arrow({ direction = "right" }: { direction?: "right" | "left" }) {
+function Arrow({
+    direction = "right",
+}: {
+    direction?: "right" | "left" | "down";
+}) {
     return <span className={`arrow arrow-${direction}`} aria-hidden="true" />;
 }
 
@@ -191,24 +192,6 @@ function LazyVideo({
     );
 }
 
-function Timecode() {
-    const [frame, setFrame] = useState(0);
-    useEffect(() => {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-            return;
-        const interval = window.setInterval(
-            () => setFrame((current) => (current + 1) % 24),
-            1000,
-        );
-        return () => window.clearInterval(interval);
-    }, []);
-    return (
-        <span className="timecode">
-            HB.FILMS / 00:00:{String(frame).padStart(2, "0")}:12
-        </span>
-    );
-}
-
 function ProjectCard({
     project,
     featured,
@@ -262,11 +245,14 @@ function OpeningSequence({ onFinish }: { onFinish: () => void }) {
         return () => window.clearTimeout(timeout);
     }, [onFinish]);
     return (
-        <div className="opening-sequence" aria-label="Abertura HB.Films">
+        <div
+            className="opening-sequence"
+            aria-label="Abertura hb produtora audiovisual"
+        >
             <div className="opening-line" />
             <div className="opening-content">
                 <span className="opening-time">00:00:00:00</span>
-                <span className="opening-title">A film production studio</span>
+                <span className="opening-title">Uma produtora audiovisual</span>
             </div>
         </div>
     );
@@ -356,14 +342,13 @@ function App() {
                     className="brand-lockup"
                     href="#inicio"
                     onClick={closeMenu}
-                    aria-label="HB.Films, início"
+                    aria-label="hb produtora audiovisual, início"
                 >
-                    <img src={logoMark} alt="HB.Films" />
+                    <img src={logoMark} alt="hb produtora audiovisual" />
                 </a>
                 <nav className="desktop-nav" aria-label="Navegação principal">
                     <a href="#portfolio">Trabalhos</a>
                     <a href="#processo">Processo</a>
-                    <a href="#studio">Estúdio</a>
                     <a href="#contato">Contato</a>
                 </nav>
                 <div className="header-side">
@@ -395,18 +380,15 @@ function App() {
                         <a href="#portfolio" onClick={closeMenu}>
                             <span>01</span> Trabalhos <Arrow />
                         </a>
-                        <a href="#studio" onClick={closeMenu}>
-                            <span>02</span> Estúdio <Arrow />
-                        </a>
                         <a href="#processo" onClick={closeMenu}>
-                            <span>03</span> Processo <Arrow />
+                            <span>02</span> Processo <Arrow />
                         </a>
                         <a href="#contato" onClick={closeMenu}>
-                            <span>04</span> Começar um projeto <Arrow />
+                            <span>03</span> Começar um projeto <Arrow />
                         </a>
                     </nav>
                     <div className="menu-panel-footer">
-                        <span>HB.Films</span>
+                        <span>hb produtora audiovisual</span>
                         <a href={contactHref} target="_blank" rel="noreferrer">
                             WhatsApp <Arrow />
                         </a>
@@ -418,7 +400,7 @@ function App() {
                 <section id="inicio" ref={heroRef} className="hero-section">
                     <div className="hero-media" aria-hidden="true">
                         <LazyVideo
-                            source={videos.king}
+                            source={videos.hero}
                             eager
                             muted
                             autoPlay
@@ -432,69 +414,29 @@ function App() {
                             <span className="recording-mark">
                                 <span /> REC
                             </span>
-                            <Timecode />
                         </div>
                         <div className="hero-copy">
                             <p className="hero-label">
-                                HB.Films / produção audiovisual para negócios
+                                hb produtora audiovisual / produção audiovisual
+                                para negócios
                             </p>
                             <h1>
-                                Filmes para empresas que precisam ser vistas.
+                                Captando <span>momentos</span> que contam{" "}
+                                <span>histórias</span>
                             </h1>
                             <div className="hero-actions">
                                 <a
-                                    className="button button-light"
+                                    className="button button-light button-down"
                                     href="#portfolio"
+                                    aria-label="Ver trabalhos"
                                 >
-                                    ver trabalhos <Arrow />
-                                </a>
-                                <a
-                                    className="text-link text-link-light"
-                                    href={contactHref}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    falar sobre um projeto <Arrow />
+                                    <Arrow direction="down" />
                                 </a>
                             </div>
                         </div>
                         <div className="hero-footer">
-                            <span>direção / produção / pós</span>
                             <span>sombrio, sc</span>
-                            <span className="hero-aspect">16:9</span>
                         </div>
-                    </div>
-                </section>
-
-                <section
-                    id="sobre"
-                    className="manifesto-section section-paper"
-                    aria-labelledby="manifesto-title"
-                >
-                    <div className="page-width manifesto-grid">
-                        <Reveal className="manifesto-index">
-                            <span className="eyebrow">
-                                O filme começa antes da câmera
-                            </span>
-                            <span className="manifesto-rule" />
-                            <span className="manifesto-note">
-                                A imagem é o meio. A clareza é o trabalho.
-                            </span>
-                        </Reveal>
-                        <Reveal className="manifesto-copy">
-                            <h2 id="manifesto-title">
-                                Corporate films <em>without</em> the corporate
-                                look.
-                            </h2>
-                            <p>
-                                Transformamos operações, pessoas e marcas em
-                                filmes que ajudam empresas a serem entendidas e
-                                lembradas.
-                            </p>
-                            <a className="text-link" href="#processo">
-                                conheça nosso processo <Arrow />
-                            </a>
-                        </Reveal>
                     </div>
                 </section>
 
@@ -505,16 +447,11 @@ function App() {
                 >
                     <div className="page-width">
                         <Reveal className="section-intro">
-                            <p className="eyebrow">Trabalhos selecionados</p>
                             <h2 id="work-title">
-                                Imagem com função.
-                                <br />
-                                Ritmo com propósito.
+                                <span className="title-underlined">
+                                    Portfólio
+                                </span>
                             </h2>
-                            <p className="section-intro-body">
-                                Projetos institucionais, de marca e de evento
-                                pensados para comunicar algo que importa.
-                            </p>
                         </Reveal>
                         <div className="project-grid">
                             {projects.map((project, index) => (
@@ -553,27 +490,13 @@ function App() {
                 >
                     <div className="page-width business-grid">
                         <Reveal className="business-title-wrap">
-                            <p className="eyebrow">O valor do filme</p>
+                            <p className="eyebrow">O valor do vídeo</p>
                             <h2 id="business-title">
                                 Vídeo bonito chama atenção. Vídeo claro move a
                                 conversa.
                             </h2>
                         </Reveal>
                         <Reveal className="business-copy">
-                            <p>
-                                Não começamos pelo equipamento. Começamos pelo
-                                que o público precisa entender, sentir e fazer
-                                depois de assistir.
-                            </p>
-                            <div className="business-stat">
-                                <strong>
-                                    3<span>+</span>
-                                </strong>
-                                <span>
-                                    anos transformando briefings em imagens com
-                                    direção.
-                                </span>
-                            </div>
                             <a className="text-link" href="#contato">
                                 trazer um briefing <Arrow />
                             </a>
@@ -584,7 +507,7 @@ function App() {
                         aria-label="O que conduz cada produção"
                     >
                         <div className="value-list-heading">
-                            <span>O filme precisa</span>
+                            <span>O vídeo precisa</span>
                             <span>para funcionar</span>
                         </div>
                         <div className="value-list-items">
@@ -618,14 +541,9 @@ function App() {
                 >
                     <div className="page-width capabilities-grid">
                         <Reveal className="capabilities-heading">
-                            <p className="eyebrow">O que fazemos</p>
                             <h2 id="capabilities-title">
-                                Da ideia à entrega final.
+                                Quais trabalhos produzimos?
                             </h2>
-                            <p>
-                                Um time para pensar, filmar, editar e deixar o
-                                projeto pronto para circular.
-                            </p>
                         </Reveal>
                         <div className="capability-list">
                             {capabilities.map(([title, description], index) => (
@@ -656,118 +574,27 @@ function App() {
                 </section>
 
                 <section
-                    id="studio"
-                    className="studio-section section-paper"
-                    aria-labelledby="studio-title"
-                >
-                    <div className="page-width studio-grid">
-                        <Reveal className="studio-image-wrap">
-                            <div className="studio-image">
-                                <img
-                                    src={director}
-                                    alt="Henrique Brezolin segurando um gimbal durante uma filmagem"
-                                />
-                                <Viewfinder />
-                                <span className="image-caption">
-                                    direção em movimento
-                                </span>
-                            </div>
-                            {/* <img
-                                className="focus-graphic"
-                                src={focusGraphic}
-                                alt="HB.Films em composição circular"
-                            /> */}
-                        </Reveal>
-                        <Reveal className="studio-copy">
-                            <p className="eyebrow">Behind the frame</p>
-                            <h2 id="studio-title">A câmera é só o começo.</h2>
-                            <p>
-                                O trabalho acontece entre o briefing e o corte
-                                final. É ali que uma operação ganha ritmo, que
-                                uma pessoa encontra sua voz e que uma marca
-                                passa a ocupar espaço.
-                            </p>
-                            <div className="studio-notes">
-                                <div>
-                                    <span>01</span>
-                                    <strong>Direção próxima</strong>
-                                    <p>
-                                        Decisões objetivas no set e cuidado com
-                                        cada pessoa em cena.
-                                    </p>
-                                </div>
-                                <div>
-                                    <span>02</span>
-                                    <strong>Produção organizada</strong>
-                                    <p>
-                                        Planejamento para o dia de filmagem
-                                        render o que o projeto precisa.
-                                    </p>
-                                </div>
-                                <div>
-                                    <span>03</span>
-                                    <strong>Pós com intenção</strong>
-                                    <p>
-                                        Montagem, som e versões que respeitam a
-                                        história e o canal.
-                                    </p>
-                                </div>
-                            </div>
-                        </Reveal>
-                    </div>
-                    <div
-                        className="film-strip"
-                        aria-label="Áreas de atuação da HB.Films"
-                    >
-                        <div className="film-strip-track">
-                            <span>direção</span>
-                            <i />
-                            <span>produção</span>
-                            <i />
-                            <span>edição</span>
-                            <i />
-                            <span>motion</span>
-                            <i />
-                            <span>som</span>
-                            <i />
-                            <span>direção</span>
-                            <i />
-                            <span>produção</span>
-                            <i />
-                            <span>edição</span>
-                            <i />
-                            <span>motion</span>
-                            <i />
-                            <span>som</span>
-                            <i />
-                        </div>
-                    </div>
-                </section>
-
-                <section
                     className="credits-section section-paper"
                     aria-labelledby="credits-title"
                 >
                     <div className="page-width credits-grid">
                         <Reveal className="credits-heading">
-                            <p className="eyebrow">Projetos no portfólio</p>
                             <h2 id="credits-title">
-                                Empresas que confiaram suas histórias ao nosso
-                                olhar.
+                                Empresas que confiaram no nosso trabalho.
                             </h2>
                         </Reveal>
                         <Reveal className="credits-list">
                             <div className="credit-row">
-                                <span>Farmagnus</span>
-                                <small>institucional</small>
+                                <span>Chef do Disco</span>
+                                <small>conteúdo gastronômico</small>
                             </div>
                             <div className="credit-row">
-                                <span>Elos Contabilidade</span>
-                                <small>filme de marca</small>
+                                <span>Surfs Scream</span>
+                                <small>Vídeos publicitários</small>
                             </div>
                             <div className="credit-row">
-                                <span>Maurício Recursos de Multas</span>
-                                <small>conteúdo corporativo</small>
+                                <span>Pão de Ló</span>
+                                <small>Conteúdos comerciais</small>
                             </div>
                         </Reveal>
                     </div>
@@ -780,14 +607,9 @@ function App() {
                 >
                     <div className="page-width process-grid">
                         <Reveal className="process-heading">
-                            <p className="eyebrow">Director's notes</p>
                             <h2 id="process-title">
-                                Um bom filme tem um bom processo por trás.
+                                Um bom vídeo tem um bom processo por trás.
                             </h2>
-                            <p>
-                                Do primeiro entendimento à entrega, cada etapa
-                                deixa o próximo corte mais preciso.
-                            </p>
                         </Reveal>
                         <Reveal className="process-timeline">
                             <div className="timeline-line" />
@@ -828,7 +650,7 @@ function App() {
                                 <div>
                                     <strong>Entrega</strong>
                                     <p>
-                                        O filme pronto para cumprir seu papel.
+                                        O vídeo pronto para cumprir seu papel.
                                     </p>
                                 </div>
                             </div>
@@ -945,7 +767,17 @@ function App() {
 
             <footer className="site-footer section-dark">
                 <div className="page-width footer-top">
-                    <img src={logo} alt="HB.Films" className="footer-logo" />
+                    <div
+                        className="footer-brand"
+                        aria-label="hb produtora audiovisual"
+                    >
+                        <img src={logoMark} alt="" />
+                        <span>
+                            hb produtora
+                            <br />
+                            audiovisual
+                        </span>
+                    </div>
                     <div className="footer-cta">
                         <span>Quando estiver pronto, a gente dá o rec.</span>
                         <a
@@ -959,7 +791,7 @@ function App() {
                     </div>
                 </div>
                 <div className="page-width footer-bottom">
-                    <span>HB.Films / Sombrio, SC</span>
+                    <span>hb produtora audiovisual / Sombrio, SC</span>
                     <div>
                         <a
                             href="https://www.instagram.com/hb.filmsbr/"
@@ -972,7 +804,9 @@ function App() {
                             WhatsApp
                         </a>
                     </div>
-                    <span>© {new Date().getFullYear()} HB.Films</span>
+                    <span>
+                        © {new Date().getFullYear()} hb produtora audiovisual
+                    </span>
                 </div>
             </footer>
 

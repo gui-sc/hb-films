@@ -6,6 +6,7 @@
     --paper: #eeeeec;
     --paper-soft: #d5d5d1;
     --paper-deep: #b9b9b5;
+    --title-accent: #1A19CC;
     --line-dark: rgba(238, 238, 236, 0.22);
     --line-light: rgba(10, 10, 10, 0.2);
     --display: "ClashGrotesk-Variable", "ClashGrotesk-Regular", sans-serif;
@@ -51,6 +52,12 @@ button,
 input,
 textarea {
     font-family: var(--display);
+}
+
+h1,
+h2,
+h3 {
+    color: var(--title-accent);
 }
 
 button,
@@ -126,7 +133,6 @@ video {
 }
 
 .eyebrow,
-.timecode,
 .hero-label,
 .hero-footer,
 .project-meta,
@@ -219,6 +225,12 @@ textarea:focus-visible {
     background: var(--paper-deep);
 }
 
+.button-down {
+    justify-content: center;
+    width: 48px;
+    padding: 0;
+}
+
 .button-dark {
     background: var(--ink);
     color: var(--paper);
@@ -269,6 +281,10 @@ textarea:focus-visible {
 
 .arrow-left {
     transform: rotate(180deg);
+}
+
+.arrow-down {
+    transform: rotate(90deg);
 }
 
 /* Opening sequence */
@@ -610,7 +626,7 @@ textarea:focus-visible {
 }
 
 .hero-copy h1 {
-    max-width: 11ch;
+    max-width: 20ch;
     margin: 0;
     color: var(--paper);
     font-size: clamp(4rem, 9.1vw, 9rem);
@@ -618,6 +634,10 @@ textarea:focus-visible {
     letter-spacing: -0.085em;
     line-height: 0.86;
     text-wrap: balance;
+}
+
+.hero-copy h1 span {
+    color: var(--title-accent);
 }
 
 .hero-actions {
@@ -629,16 +649,8 @@ textarea:focus-visible {
 
 .hero-footer {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr;
     color: var(--paper-deep);
-}
-
-.hero-footer span:nth-child(2) {
-    text-align: center;
-}
-
-.hero-aspect {
-    color: var(--paper);
 }
 
 /* Manifesto and editorial sections */
@@ -735,6 +747,12 @@ textarea:focus-visible {
     font-weight: 500;
     letter-spacing: -0.09em;
     line-height: 0.84;
+}
+
+.title-underlined {
+    text-decoration: underline;
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.08em;
 }
 
 .section-intro-body {
@@ -1056,7 +1074,7 @@ textarea:focus-visible {
 
 .capabilities-heading h2 {
     max-width: 7ch;
-    margin-top: 24px;
+    margin-top: 0;
 }
 
 .capabilities-heading > p:last-child {
@@ -1484,8 +1502,24 @@ textarea:focus-visible {
     padding-bottom: 120px;
 }
 
-.footer-logo {
-    width: min(100%, 270px);
+.footer-brand {
+    display: flex;
+    align-items: end;
+    gap: 18px;
+    width: min(100%, 330px);
+}
+
+.footer-brand img {
+    width: 92px;
+    height: auto;
+}
+
+.footer-brand span {
+    color: var(--paper);
+    font-size: clamp(1.5rem, 3vw, 2.8rem);
+    font-weight: 500;
+    letter-spacing: -0.07em;
+    line-height: 0.88;
 }
 
 .footer-cta {
@@ -1744,14 +1778,7 @@ textarea:focus-visible {
         margin-top: 28px;
     }
     .hero-footer {
-        grid-template-columns: 1fr auto;
-        gap: 12px;
-    }
-    .hero-footer span:nth-child(2) {
-        display: none;
-    }
-    .hero-aspect {
-        text-align: right;
+        display: block;
     }
     .manifesto-copy h2,
     .business-title-wrap h2,
@@ -1781,7 +1808,7 @@ textarea:focus-visible {
     }
     .section-intro h2 {
         max-width: 9ch;
-        margin-top: 22px;
+        margin-top: 0;
         font-size: clamp(3.6rem, 16vw, 6.8rem);
     }
     .section-intro-body {
