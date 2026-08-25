@@ -1,5 +1,4 @@
 import {
-    type FormEvent,
     type ReactNode,
     type VideoHTMLAttributes,
     useEffect,
@@ -323,9 +322,6 @@ function App() {
         null,
     );
     const [activeCapability, setActiveCapability] = useState(0);
-    const [form, setForm] = useState({ name: "", email: "", brief: "" });
-    const [formError, setFormError] = useState("");
-    const [formSent, setFormSent] = useState(false);
     const [backToTopVisible, setBackToTopVisible] = useState(false);
     const heroRef = useRef<HTMLElement>(null);
 
@@ -365,29 +361,6 @@ function App() {
     }, []);
 
     const closeMenu = () => setMenuOpen(false);
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (!form.name.trim() || !form.email.trim() || !form.brief.trim()) {
-            setFormError(
-                "Preencha nome, e-mail e uma breve descrição do projeto.",
-            );
-            setFormSent(false);
-            return;
-        }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-            setFormError("Confira o formato do seu e-mail.");
-            setFormSent(false);
-            return;
-        }
-        setFormError("");
-        setFormSent(true);
-        const message = `Olá, sou ${form.name}. Meu e-mail é ${form.email}. Projeto: ${form.brief}`;
-        window.open(
-            `${whatsappUrl}?text=${encodeURIComponent(message)}`,
-            "_blank",
-            "noopener,noreferrer",
-        );
-    };
 
     return (
         <div className="site-shell">
@@ -738,84 +711,6 @@ function App() {
                             >
                                 falar pelo WhatsApp <Arrow />
                             </a>
-                        </Reveal>
-                        <Reveal className="contact-form-wrap">
-                            <form
-                                className="contact-form"
-                                onSubmit={handleSubmit}
-                                noValidate
-                            >
-                                <label>
-                                    <span>Seu nome</span>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={form.name}
-                                        onChange={(event) =>
-                                            setForm({
-                                                ...form,
-                                                name: event.target.value,
-                                            })
-                                        }
-                                        placeholder="Como podemos chamar você?"
-                                        autoComplete="name"
-                                    />
-                                </label>
-                                <label>
-                                    <span>Seu e-mail</span>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={form.email}
-                                        onChange={(event) =>
-                                            setForm({
-                                                ...form,
-                                                email: event.target.value,
-                                            })
-                                        }
-                                        placeholder="nome@empresa.com"
-                                        autoComplete="email"
-                                    />
-                                </label>
-                                <label>
-                                    <span>Sobre o projeto</span>
-                                    <textarea
-                                        name="brief"
-                                        value={form.brief}
-                                        onChange={(event) =>
-                                            setForm({
-                                                ...form,
-                                                brief: event.target.value,
-                                            })
-                                        }
-                                        placeholder="O que você quer colocar em movimento?"
-                                        rows={4}
-                                    />
-                                </label>
-                                {formError && (
-                                    <p
-                                        className="form-feedback form-error"
-                                        role="alert"
-                                    >
-                                        {formError}
-                                    </p>
-                                )}
-                                {formSent && (
-                                    <p
-                                        className="form-feedback form-success"
-                                        role="status"
-                                    >
-                                        Briefing pronto. O WhatsApp foi aberto
-                                        para você continuar a conversa.
-                                    </p>
-                                )}
-                                <button
-                                    className="button button-dark"
-                                    type="submit"
-                                >
-                                    enviar briefing <Arrow />
-                                </button>
-                            </form>
                         </Reveal>
                     </div>
                 </section>
