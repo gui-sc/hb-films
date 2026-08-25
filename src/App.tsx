@@ -13,9 +13,11 @@ const contactHref = `${whatsappUrl}?text=${encodeURIComponent("Olá, gostaria de
 
 const videos = {
     hero: "https://storage.googleapis.com/hbfilms/king.mp4",
-    chefDoDisco: "https://storage.googleapis.com/hbfilms/chef_do_disco.mp4",
-    surfsScream: "https://storage.googleapis.com/hbfilms/surfs_scream.mp4",
-    paoDeLo: "https://storage.googleapis.com/hbfilms/pao_de_lo.mp4",
+    chefDoDisco: "https://storage.googleapis.com/hbfilms/chefdisco.MP4",
+    eventos: "https://storage.googleapis.com/hbfilms/eventos.MP4",
+    paoDeLo: "https://storage.googleapis.com/hbfilms/paodelo.mp4",
+    atletas: "https://storage.googleapis.com/hbfilms/atletas.MP4",
+    imobiliario: "https://storage.googleapis.com/hbfilms/corretor.MP4",
 };
 
 type Project = {
@@ -32,32 +34,52 @@ const projects: Project[] = [
     {
         code: "014",
         category: "Gastronomia",
-        title: "Conteúdo gastronômico com presença.",
+        title: "Conteúdo Gastronômico",
         client: "Chef do Disco",
         description:
-            "Conteúdo gastronômico criado para despertar interesse e aproximar a marca das pessoas.",
+            "Vídeos estratégicos para gerar desejo, engajamento e alcance no Instagram e TikTok.",
         source: videos.chefDoDisco,
         format: "Conteúdo gastronômico",
     },
     {
         code: "021",
-        category: "Publicidade",
-        title: "Vídeos publicitários em movimento.",
-        client: "Surfs Scream",
+        category: "Atletas",
+        title: "Vídeos para Atletas",
+        client: "Futevôlei",
         description:
-            "Vídeos publicitários pensados para dar ritmo, presença e impacto à comunicação da marca.",
-        source: videos.surfsScream,
-        format: "Vídeos publicitários",
+            "Conteúdos individuais que destacam os melhores lances, a habilidade e a performance de cada atleta.",
+        source: videos.atletas,
+        format: "Vídeos para atletas",
     },
     {
         code: "032",
+        category: "Imobiliário",
+        title: "Conteúdos imobiliários",
+        client: "Ramo Imobiliário",
+        description:
+            "Vídeos que apresentam cada detalhe do imóvel de forma estratégica, valorizando o espaço e atraindo compradores.",
+        source: videos.imobiliario,
+        format: "Conteúdos imobiliários",
+    },
+    {
+        code: "027",
+        category: "Eventos",
+        title: "Cobertura de Eventos",
+        client: "Monise",
+        description:
+            "Registros que transformam aniversários, celebrações e momentos especiais em memórias para sempre.",
+        source: videos.eventos,
+        format: "Cobertura de eventos",
+    },
+    {
+        code: "018",
         category: "Comercial",
-        title: "Conteúdos comerciais para a marca.",
+        title: "Conteúdo Comercial",
         client: "Pão de Ló",
         description:
-            "Conteúdos comerciais que apresentam produtos com clareza e constroem desejo de compra.",
+            "Vídeos que apresentam os produtos, despertam o desejo e atraem clientes para o estabelecimento.",
         source: videos.paoDeLo,
-        format: "Conteúdos comerciais",
+        format: "Conteúdo comercial",
     },
 ];
 
@@ -192,6 +214,43 @@ function LazyVideo({
     );
 }
 
+function CaseVideo({ source }: { source: string }) {
+    const ref = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const node = ref.current;
+        if (!node) return;
+
+        const playWithSound = () => {
+            node.muted = false;
+            node.defaultMuted = false;
+            node.volume = 1;
+            node.play().catch(() => undefined);
+        };
+
+        node.addEventListener("loadeddata", playWithSound);
+        if (node.readyState >= 2) playWithSound();
+
+        return () => {
+            node.pause();
+            node.currentTime = 0;
+            node.removeEventListener("loadeddata", playWithSound);
+        };
+    }, [source]);
+
+    return (
+        <video
+            ref={ref}
+            className="case-video"
+            src={source}
+            autoPlay
+            controls
+            playsInline
+            preload="auto"
+        />
+    );
+}
+
 function ProjectCard({
     project,
     featured,
@@ -232,7 +291,6 @@ function ProjectCard({
                 </div>
                 <div className="project-meta">
                     <span>{project.client}</span>
-                    <span>Projeto {project.code}</span>
                 </div>
             </div>
         </article>
@@ -448,9 +506,7 @@ function App() {
                     <div className="page-width">
                         <Reveal className="section-intro">
                             <h2 id="work-title">
-                                <span className="title-underlined">
-                                    Portfólio
-                                </span>
+                                <span>Portfólio</span>
                             </h2>
                         </Reveal>
                         <div className="project-grid">
@@ -836,19 +892,14 @@ function App() {
                             fechar <span>×</span>
                         </button>
                         <div className="case-dialog-media">
-                            <LazyVideo
+                            <CaseVideo
                                 source={selectedProject.source}
-                                eager
-                                muted
-                                autoPlay
-                                playsInline
                             />
                         </div>
                         <div className="case-dialog-content">
                             <div>
                                 <p className="eyebrow">
-                                    {selectedProject.category} / projeto{" "}
-                                    {selectedProject.code}
+                                    {selectedProject.category}
                                 </p>
                                 <h2 id="case-title">{selectedProject.title}</h2>
                             </div>
