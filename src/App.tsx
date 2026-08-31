@@ -268,6 +268,71 @@ function LazyVideo({
     );
 }
 
+function HeroVideo({
+    source,
+    canAutoplay,
+}: {
+    source: string;
+    canAutoplay: boolean;
+}) {
+    const ref = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const node = ref.current;
+        if (!node) return;
+
+        const startPlayback = () => playMutedVideo(node);
+        const retryWhenVisible = () => {
+            if (document.visibilityState === "visible") {
+                startPlayback();
+            }
+        };
+
+        // Safari checks these attributes when the media resource is loaded.
+        node.muted = true;
+        node.defaultMuted = true;
+        node.volume = 0;
+        node.playsInline = true;
+        node.autoplay = true;
+        node.setAttribute("muted", "");
+        node.setAttribute("autoplay", "");
+        node.setAttribute("playsinline", "");
+        node.setAttribute("webkit-playsinline", "true");
+
+        node.addEventListener("loadedmetadata", startPlayback);
+        node.addEventListener("loadeddata", startPlayback);
+        node.addEventListener("canplay", startPlayback);
+        node.addEventListener("canplaythrough", startPlayback);
+        document.addEventListener("visibilitychange", retryWhenVisible);
+        node.load();
+        if (canAutoplay) {
+            startPlayback();
+        }
+
+        return () => {
+            node.pause();
+            node.removeEventListener("loadedmetadata", startPlayback);
+            node.removeEventListener("loadeddata", startPlayback);
+            node.removeEventListener("canplay", startPlayback);
+            node.removeEventListener("canplaythrough", startPlayback);
+            document.removeEventListener("visibilitychange", retryWhenVisible);
+        };
+    }, [canAutoplay, source]);
+
+    return (
+        <video
+            ref={ref}
+            className="lazy-video is-loaded"
+            muted
+            autoPlay
+            playsInline
+            loop
+            src={source}
+            preload="auto"
+        />
+    );
+}
+
 function CaseVideo({ source }: { source: string }) {
     const ref = useRef<HTMLVideoElement>(null);
 
@@ -485,13 +550,9 @@ function App() {
             <main id="conteudo">
                 <section id="inicio" ref={heroRef} className="hero-section">
                     <div className="hero-media" aria-hidden="true">
-                        <LazyVideo
+                        <HeroVideo
                             source={videos.hero}
-                            eager
-                            muted
-                            autoPlay
-                            loop
-                            playsInline
+                            canAutoplay={!introVisible}
                         />
                         <div className="hero-media-shade" />
                     </div>
