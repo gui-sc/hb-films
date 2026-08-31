@@ -178,14 +178,25 @@ function LazyVideo({
     className = "",
     ...props
 }: LazyVideoProps) {
-    const [loaded, setLoaded] = useState(eager);
+    const [loaded, setLoaded] = useState(false);
     const ref = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
         const node = ref.current;
         if (!node) return;
 
-        if (eager) return;
+        // Configure autoplay before attaching the source. Mobile browsers
+        // can reject autoplay if the first load happens before the video is muted.
+        node.muted = true;
+        node.defaultMuted = true;
+        node.volume = 0;
+        node.setAttribute("muted", "");
+        node.setAttribute("playsinline", "");
+
+        if (eager) {
+            setLoaded(true);
+            return;
+        }
 
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -215,6 +226,7 @@ function LazyVideo({
         node.addEventListener("loadedmetadata", retryAutoplay);
         node.addEventListener("loadeddata", retryAutoplay);
         node.addEventListener("canplay", retryAutoplay);
+        node.addEventListener("canplaythrough", retryAutoplay);
         document.addEventListener("visibilitychange", retryWhenVisible);
         retryAutoplay();
 
@@ -222,6 +234,7 @@ function LazyVideo({
             node.removeEventListener("loadedmetadata", retryAutoplay);
             node.removeEventListener("loadeddata", retryAutoplay);
             node.removeEventListener("canplay", retryAutoplay);
+            node.removeEventListener("canplaythrough", retryAutoplay);
             document.removeEventListener("visibilitychange", retryWhenVisible);
         };
     }, [loaded, source]);
@@ -237,6 +250,7 @@ function LazyVideo({
             onLoadedMetadata={(event) => playMutedVideo(event.currentTarget)}
             onLoadedData={(event) => playMutedVideo(event.currentTarget)}
             onCanPlay={(event) => playMutedVideo(event.currentTarget)}
+            onCanPlayThrough={(event) => playMutedVideo(event.currentTarget)}
         />
     );
 }
