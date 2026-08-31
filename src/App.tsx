@@ -165,6 +165,13 @@ type LazyVideoProps = VideoHTMLAttributes<HTMLVideoElement> & {
     eager?: boolean;
 };
 
+function playMutedVideo(node: HTMLVideoElement) {
+    node.muted = true;
+    node.defaultMuted = true;
+    node.volume = 0;
+    node.play().catch(() => undefined);
+}
+
 function LazyVideo({
     source,
     eager = false,
@@ -177,15 +184,13 @@ function LazyVideo({
     useEffect(() => {
         const node = ref.current;
         if (!node) return;
-        node.muted = true;
-        node.defaultMuted = true;
-        node.volume = 0;
+
         if (eager) return;
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setLoaded(true);
-                    node.play().catch(() => undefined);
                 } else {
                     node.pause();
                 }
@@ -196,19 +201,42 @@ function LazyVideo({
         return () => observer.disconnect();
     }, [eager]);
 
+    useEffect(() => {
+        const node = ref.current;
+        if (!node || !loaded) return;
+
+        const retryAutoplay = () => playMutedVideo(node);
+        const retryWhenVisible = () => {
+            if (document.visibilityState === "visible") {
+                retryAutoplay();
+            }
+        };
+
+        node.addEventListener("loadedmetadata", retryAutoplay);
+        node.addEventListener("loadeddata", retryAutoplay);
+        node.addEventListener("canplay", retryAutoplay);
+        document.addEventListener("visibilitychange", retryWhenVisible);
+        retryAutoplay();
+
+        return () => {
+            node.removeEventListener("loadedmetadata", retryAutoplay);
+            node.removeEventListener("loadeddata", retryAutoplay);
+            node.removeEventListener("canplay", retryAutoplay);
+            document.removeEventListener("visibilitychange", retryWhenVisible);
+        };
+    }, [loaded, source]);
+
     return (
         <video
             ref={ref}
             className={`lazy-video ${loaded ? "is-loaded" : ""} ${className}`}
             src={loaded ? source : undefined}
             preload={eager ? "auto" : "metadata"}
-            onLoadedData={(event) => {
-                event.currentTarget.muted = true;
-                event.currentTarget.defaultMuted = true;
-                event.currentTarget.volume = 0;
-                event.currentTarget.play().catch(() => undefined);
-            }}
             {...props}
+            muted
+            onLoadedMetadata={(event) => playMutedVideo(event.currentTarget)}
+            onLoadedData={(event) => playMutedVideo(event.currentTarget)}
+            onCanPlay={(event) => playMutedVideo(event.currentTarget)}
         />
     );
 }
