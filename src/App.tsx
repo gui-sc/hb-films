@@ -169,6 +169,10 @@ function playMutedVideo(node: HTMLVideoElement) {
     node.muted = true;
     node.defaultMuted = true;
     node.volume = 0;
+    node.playsInline = true;
+    node.setAttribute("muted", "");
+    node.setAttribute("playsinline", "");
+    node.setAttribute("webkit-playsinline", "true");
     node.play().catch(() => undefined);
 }
 
@@ -192,6 +196,11 @@ function LazyVideo({
         node.volume = 0;
         node.setAttribute("muted", "");
         node.setAttribute("playsinline", "");
+        node.setAttribute("webkit-playsinline", "true");
+        if (props.autoPlay) {
+            node.autoplay = true;
+            node.setAttribute("autoplay", "");
+        }
 
         if (eager) {
             setLoaded(true);
@@ -228,6 +237,9 @@ function LazyVideo({
         node.addEventListener("canplay", retryAutoplay);
         node.addEventListener("canplaythrough", retryAutoplay);
         document.addEventListener("visibilitychange", retryWhenVisible);
+        // `src` is attached on the previous render. Calling load() here makes
+        // Safari start the new resource before the first play() attempt.
+        node.load();
         retryAutoplay();
 
         return () => {
@@ -247,6 +259,7 @@ function LazyVideo({
             preload={eager ? "auto" : "metadata"}
             {...props}
             muted
+            playsInline
             onLoadedMetadata={(event) => playMutedVideo(event.currentTarget)}
             onLoadedData={(event) => playMutedVideo(event.currentTarget)}
             onCanPlay={(event) => playMutedVideo(event.currentTarget)}
