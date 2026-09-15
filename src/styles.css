@@ -6,7 +6,7 @@
     --paper: #eeeeec;
     --paper-soft: #d5d5d1;
     --paper-deep: #b9b9b5;
-    --title-accent: #1A19CC;
+    --title-accent: #1a19cc;
     --line-dark: rgba(238, 238, 236, 0.22);
     --line-light: rgba(10, 10, 10, 0.2);
     --display: "ClashGrotesk-Variable", "ClashGrotesk-Regular", sans-serif;
@@ -755,10 +755,11 @@ textarea:focus-visible {
     line-height: 0.84;
     justify-self: end;
     text-align: right;
+    color: var(--paper);
     text-shadow:
-        0 0 1px var(--paper),
-        0 0 18px rgba(238, 238, 236, 0.7),
-        0 0 42px rgba(238, 238, 236, 0.28);
+        0 0 8px var(--title-accent),
+        0 0 20px var(--title-accent),
+        0 0 20px var(--title-accent);
 }
 
 .section-intro-body {
@@ -1088,6 +1089,11 @@ textarea:focus-visible {
     padding-block: clamp(120px, 15vw, 230px);
 }
 
+.capabilities-section.section-paper {
+    background: #ffffff;
+    color: var(--ink);
+}
+
 .capabilities-grid {
     display: grid;
     grid-template-columns: 4fr 7fr;
@@ -1125,6 +1131,7 @@ textarea:focus-visible {
     text-align: left;
     transition:
         padding 350ms var(--ease-out),
+        background 250ms ease,
         color 250ms ease;
 }
 
@@ -1159,6 +1166,33 @@ textarea:focus-visible {
 
 .capability-row .arrow {
     justify-self: end;
+}
+
+.capabilities-section.section-paper .capabilities-heading h2 {
+    color: var(--title-accent);
+}
+
+.capabilities-section.section-paper .capabilities-heading > p:last-child {
+    color: #5e5e59;
+}
+
+.capabilities-section.section-paper .capability-row {
+    border-color: var(--line-light);
+    color: var(--ink);
+}
+
+.capabilities-section.section-paper .capability-row:hover,
+.capabilities-section.section-paper .capability-row.is-active {
+    background: #f1f1ee;
+    color: var(--title-accent);
+}
+
+.capabilities-section.section-paper .capability-number {
+    color: #777771;
+}
+
+.capabilities-section.section-paper .capability-description {
+    color: #60605c;
 }
 
 /* Studio */

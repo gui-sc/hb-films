@@ -629,59 +629,8 @@ function App() {
                 </section>
 
                 <section
-                    id="diferenciais"
-                    className="business-section section-paper"
-                    aria-labelledby="business-title"
-                >
-                    <div className="page-width business-grid">
-                        <Reveal className="business-title-wrap">
-                            <p className="eyebrow">O valor do vídeo</p>
-                            <h2 id="business-title">
-                                Vídeo bonito chama atenção. Vídeo claro move a
-                                conversa.
-                            </h2>
-                        </Reveal>
-                        <Reveal className="business-copy">
-                            <a className="text-link" href="#contato">
-                                trazer um briefing <Arrow />
-                            </a>
-                        </Reveal>
-                    </div>
-                    <div
-                        className="page-width value-list"
-                        aria-label="O que conduz cada produção"
-                    >
-                        <div className="value-list-heading">
-                            <span>O vídeo precisa</span>
-                            <span>para funcionar</span>
-                        </div>
-                        <div className="value-list-items">
-                            <div>
-                                <span>01</span>
-                                <strong>ser entendido</strong>
-                                <p>Roteiro e direção a serviço da mensagem.</p>
-                            </div>
-                            <div>
-                                <span>02</span>
-                                <strong>ser sentido</strong>
-                                <p>
-                                    Imagem, som e ritmo com uma intenção clara.
-                                </p>
-                            </div>
-                            <div>
-                                <span>03</span>
-                                <strong>ser usado</strong>
-                                <p>
-                                    Entregas prontas para cada canal e momento.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section
                     id="capabilities"
-                    className="capabilities-section section-dark"
+                    className="capabilities-section section-paper"
                     aria-labelledby="capabilities-title"
                 >
                     <div className="page-width capabilities-grid">
@@ -715,33 +664,6 @@ function App() {
                                 </button>
                             ))}
                         </div>
-                    </div>
-                </section>
-
-                <section
-                    className="credits-section section-paper"
-                    aria-labelledby="credits-title"
-                >
-                    <div className="page-width credits-grid">
-                        <Reveal className="credits-heading">
-                            <h2 id="credits-title">
-                                Empresas que confiaram no nosso trabalho.
-                            </h2>
-                        </Reveal>
-                        <Reveal className="credits-list">
-                            <div className="credit-row">
-                                <span>Chef do Disco</span>
-                                <small>conteúdo gastronômico</small>
-                            </div>
-                            <div className="credit-row">
-                                <span>Surfs Scream</span>
-                                <small>Vídeos publicitários</small>
-                            </div>
-                            <div className="credit-row">
-                                <span>Pão de Ló</span>
-                                <small>Conteúdos comerciais</small>
-                            </div>
-                        </Reveal>
                     </div>
                 </section>
 
@@ -903,9 +825,7 @@ function App() {
                             fechar <span>×</span>
                         </button>
                         <div className="case-dialog-media">
-                            <CaseVideo
-                                source={selectedProject.source}
-                            />
+                            <CaseVideo source={selectedProject.source} />
                         </div>
                         <div className="case-dialog-content">
                             <div>
