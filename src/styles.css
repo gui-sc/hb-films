@@ -746,20 +746,16 @@ textarea:focus-visible {
 }
 
 .section-intro h2 {
-    grid-column: 2;
+    grid-column: 1 / span 7;
     max-width: 10ch;
     margin: 0;
     font-size: clamp(3.4rem, 8vw, 9rem);
     font-weight: 500;
     letter-spacing: -0.09em;
     line-height: 0.84;
-    justify-self: end;
-    text-align: right;
+    justify-self: start;
+    text-align: left;
     color: var(--paper);
-    text-shadow:
-        0 0 8px var(--title-accent),
-        0 0 20px var(--title-accent),
-        0 0 20px var(--title-accent);
 }
 
 .section-intro-body {
